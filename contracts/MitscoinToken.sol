@@ -1,17 +1,17 @@
-// contracts/ICanHasCheezburgerToken.sol
+// contracts/MitscoinToken.sol
 // SPDX-License-Identifier: MIT
-// This is the official version of ICHC Token
+// This is the official version of Mitscoin Token
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract ICanHasCheezburgerToken is ERC20Capped, ERC20Burnable {
+contract Mitscoin is ERC20Capped, ERC20Burnable {
     address payable owner;
     uint256 public blockReward;
 
-    constructor(uint256 cap, uint reward) ERC20("I Can Has Cheezburger Token", "ICHC") ERC20Capped(cap * (10 ** decimals())) {
+    constructor(uint256 cap, uint reward) ERC20("I Can Has Mitscoin", "MTC") ERC20Capped(cap * (10 ** decimals())) {
         _mint(msg.sender, 69000000 * (10 ** decimals()));
         owner = payable(msg.sender);
         blockReward = reward * (10 ** decimals());
