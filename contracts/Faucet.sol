@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
@@ -31,7 +31,7 @@ contract Faucet {
     // Give out ether to anyone who asks
     function withdraw() public {
         require(allowedToWithdraw(msg.sender), "Insufficient time elapsed since last withdrawal - try again later");
-        require(withdrawalAmount <= 1000 * (10 ** 18), "Request exceeds maximum withdrawal amount of 1000 ICHC");
+        require(withdrawalAmount <= 1000 * (10 ** 18), "Request exceeds maximum withdrawal amount of 1000 MTC");
         require(_token.balanceOf(address(this)) >= withdrawalAmount, "Insufficient balance in faucet for withdrawal request");
         require(msg.sender != address(0), "Request must not originate from a zero account");
         
