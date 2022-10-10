@@ -1,25 +1,22 @@
-// contracts/MitscoinToken.sol
+// contracts/mitscoin.sol
 // SPDX-License-Identifier: MIT
 // This is the official version of Mitscoin Token
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract Mitscoin is ERC20Capped, ERC20Burnable {
-    address payable owner;
+contract mitscoin is ERC20Capped, ERC20Burnable {
+    address payable public owner;
     uint256 public blockReward;
 
-    constructor(uint256 cap, uint reward) ERC20("I Can Has Mitscoin", "MTC") ERC20Capped(cap * (10 ** decimals())) {
-        _mint(msg.sender, 69000000 * (10 ** decimals()));
+    constructor(uint256 cap, uint256 reward) ERC20("mitscoin", "MTC") ERC20Capped(cap * (10 ** decimals())) {
         owner = payable(msg.sender);
+        _mint(owner, 70000000 * (10 ** decimals()));
         blockReward = reward * (10 ** decimals());
     }
 
-    /**
-     * @dev See {ERC20Capped-_mint}.
-     */
     function _mint(address account, uint256 amount) internal virtual override(ERC20Capped, ERC20) {
         require(ERC20.totalSupply() + amount <= cap(), "ERC20Capped: cap exceeded");
         super._mint(account, amount);
@@ -30,28 +27,22 @@ contract Mitscoin is ERC20Capped, ERC20Burnable {
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 value) internal virtual override {
-        if (from != address(0) && to != block.coinbase && block.coinbase != address(0)) {
-          _mintMinerReward();
+        if(from != address(0) && to != block.coinbase && block.coinbase != address(0)) {
+            _mintMinerReward();
         }
         super._beforeTokenTransfer(from, to, value);
-    }
-
-    function getBlockReward() public view returns (uint256) {
-        return blockReward;
     }
 
     function setBlockReward(uint256 reward) public onlyOwner {
         blockReward = reward * (10 ** decimals());
     }
 
-    // Contract destructor
     function destroy() public onlyOwner {
         selfdestruct(owner);
     }
 
-    // Access control modifier
     modifier onlyOwner {
-        require(msg.sender == owner, "Only the contract owner can call this function");
+        require(msg.sender == owner, "Only the owner can call this function");
         _;
     }
 }
