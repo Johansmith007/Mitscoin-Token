@@ -1,6 +1,6 @@
-const ICanHasCheezburgerToken = artifacts.require("ICanHasCheezburgerToken");
+const mitscoin = artifacts.require("mitscoin");
 
 module.exports = function(deployer) {
   // one hundred million coins
-  deployer.deploy(ICanHasCheezburgerToken, 100000000, 25);
+  deployer.deploy(mitscoin, 100000000, 25);
 };
