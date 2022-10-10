@@ -1,22 +1,20 @@
 {
-  "name": "ICanHasCheezburgerToken",
+  "name": "mitscoin",
   "version": "1.0.0",
-  "description": "ICHC Token: A peer to peer electronic cash system",
-  "main": "truffle-config.js",
-  "directories": {
-    "test": "test"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@openzeppelin/contracts": "^4.3.2",
-    "@truffle/hdwallet-provider": "^1.5.1",
-    "dotenv": "^10.0.0"
-  },
   "devDependencies": {
-    "truffle-plugin-verify": "^0.5.17"
+    "@nomicfoundation/hardhat-toolbox": "^1.0.1",
+    "chai": "^4.3.6",
+    "hardhat": "^2.11.1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
+    "dotenv": "^16.0.2"
   }
 }
